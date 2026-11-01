@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFinance } from '../../context/FinancialContext';
 import { CATEGORIES_DATA } from '../../data/categoriesData';
 import { ArrowRight, ChevronRight, Layers, Send, RefreshCw, CheckCircle2 } from 'lucide-react';
