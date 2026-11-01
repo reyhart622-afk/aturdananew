@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFinance } from '../../context/FinancialContext';
 import { CATEGORIES_DATA } from '../../data/categoriesData';
 import { MACRO_INDICATORS, MOCK_STOCKS, MOCK_DEPOSITO_RATES, MOCK_BONDS } from '../../data/marketMockData';
 import {
-  Send,
-  RefreshCw,
   CheckCircle2,
   Key,
   ShieldCheck,
@@ -46,21 +44,33 @@ export const ItemDetailView: React.FC = () => {
     ...item.keywords
   ];
 
-  const handleWorkerDispatch = async () => {
-    setWorkerResultNotice('Mengirimkan API Key ke Cloudflare Worker...');
-    const result = await triggerWorkerAction(`FETCH_INDICATOR_${item.slug.toUpperCase()}`, {
-      itemId: item.id,
-      itemName: item.name,
-      subcategorySlug: subcategory.slug,
-      categorySlug: category.slug,
-      timeframe: activeChartTimeframe
-    });
+  useEffect(() => {
+    let isMounted = true;
 
-    if (result.success) {
-      setWorkerResultNotice(`Koneksi Worker Cloudflare Sukses! Latensi: ${result.latencyMs}ms · Timestamp: ${result.timestamp}`);
-      setTimeout(() => setWorkerResultNotice(null), 5000);
+    async function autoSync() {
+      setWorkerResultNotice('Menghubungkan ke Cloudflare Worker...');
+      const result = await triggerWorkerAction(`FETCH_INDICATOR_${item.slug.toUpperCase()}`, {
+        itemId: item.id,
+        itemName: item.name,
+        subcategorySlug: subcategory.slug,
+        categorySlug: category.slug,
+        timeframe: activeChartTimeframe
+      });
+
+      if (!isMounted) return;
+
+      if (result.success) {
+        setWorkerResultNotice(`Koneksi Worker Cloudflare Sukses! Latensi: ${result.latencyMs}ms · Timestamp: ${result.timestamp}`);
+        setTimeout(() => isMounted && setWorkerResultNotice(null), 5000);
+      } else {
+        setWorkerResultNotice(`Gagal: ${result.message}`);
+        setTimeout(() => isMounted && setWorkerResultNotice(null), 5000);
+      }
     }
-  };
+
+    autoSync();
+    return () => { isMounted = false; };
+  }, [category.slug, subcategory.slug, item.slug]);
 
   // Structured data for rich Google indexing
   const itemSchema = {
@@ -122,38 +132,6 @@ export const ItemDetailView: React.FC = () => {
               {i < focusedKeywords.length - 1 && <span className="text-slate-600">·</span>}
             </React.Fragment>
           ))}
-        </div>
-
-        {/* Cloudflare Worker API Dispatch Action Panel (Disembunyikan dari tampilan mata pengunjung) */}
-        <div style={{ display: 'none' }} className="pt-4 p-4 rounded-2xl bg-slate-950/90 border border-emerald-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-xs font-bold text-white tracking-tight">
-                Sinkronisasi API Key ke Worker Cloudflare
-              </span>
-            </div>
-            <p className="text-[11px] text-slate-400 font-mono">
-              API Key aktif: <strong className="text-emerald-300">{apiKey.slice(0, 12)}...{apiKey.slice(-4)}</strong>
-            </p>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setIsApiKeyModalOpen(true)}
-              className="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs border border-slate-700 cursor-pointer"
-            >
-              Ubah Kunci
-            </button>
-            <button
-              onClick={handleWorkerDispatch}
-              disabled={isWorkerLoading}
-              className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-xs transition-colors flex items-center gap-2 cursor-pointer shadow-md disabled:opacity-50"
-            >
-              {isWorkerLoading ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Send className="w-3.5 h-3.5" />}
-              <span>Kirim ke Worker</span>
-            </button>
-          </div>
         </div>
 
         {workerResultNotice && (
@@ -278,7 +256,7 @@ export const ItemDetailView: React.FC = () => {
 
           <div className="p-5 rounded-2xl bg-slate-950/70 border border-slate-800/80 space-y-2">
             <h3 className="text-sm font-bold text-cyan-400">
-              2. Relevansi Strategis bagi Investor & Pengambil Keputusan
+              2. Relevansi Strategis bagi Investor & Pengambil Keputahan
             </h3>
             <p>
               Dengan mengawasi pergerakan {item.name} secara berkala, investor dapat menyusun mitigasi risiko drawdown dan mengoptimalkan return yang disesuaikan dengan profil risiko (Risk-Adjusted Return). Penerapan disiplin analisis sangat dianjurkan baik untuk horizon investasi jangka pendek maupun jangka panjang.
