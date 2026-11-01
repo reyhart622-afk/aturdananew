@@ -14,6 +14,99 @@ import {
 
 export type ActiveViewType = 'home' | 'category' | 'subcategory' | 'item' | 'calculator' | 'screener';
 
+// ============================================================
+// URL ROUTING — parse & build URL untuk semua halaman
+// ============================================================
+
+function findCategoryBySlug(slug: string) {
+  return CATEGORIES_DATA.find(c => c.slug === slug);
+}
+
+function findSubcategoryBySlug(category: any, slug: string) {
+  return category.subcategories.find((s: any) => s.slug === slug);
+}
+
+function findItemBySlug(subcategory: any, slug: string) {
+  return subcategory.items.find((i: any) => i.slug === slug);
+}
+
+function parseUrl(pathname: string): {
+  view: ActiveViewType;
+  categoryId: string | null;
+  subcategoryId: string | null;
+  itemId: string | null;
+} {
+  const parts = pathname.split('/').filter(Boolean);
+
+  if (parts.length === 0)
+    return { view: 'home', categoryId: null, subcategoryId: null, itemId: null };
+
+  if (parts[0] === 'kalkulator')
+    return { view: 'calculator', categoryId: null, subcategoryId: null, itemId: null };
+
+  if (parts[0] === 'screener')
+    return { view: 'screener', categoryId: null, subcategoryId: null, itemId: null };
+
+  const category = findCategoryBySlug(parts[0]);
+  if (!category)
+    return { view: 'home', categoryId: null, subcategoryId: null, itemId: null };
+
+  if (parts.length === 1)
+    return { view: 'category', categoryId: category.id, subcategoryId: null, itemId: null };
+
+  const subcategory = findSubcategoryBySlug(category, parts[1]);
+  if (!subcategory)
+    return { view: 'category', categoryId: category.id, subcategoryId: null, itemId: null };
+
+  if (parts.length === 2)
+    return { view: 'subcategory', categoryId: category.id, subcategoryId: subcategory.id, itemId: null };
+
+  const item = findItemBySlug(subcategory, parts[2]);
+  if (!item)
+    return { view: 'subcategory', categoryId: category.id, subcategoryId: subcategory.id, itemId: null };
+
+  return { view: 'item', categoryId: category.id, subcategoryId: subcategory.id, itemId: item.id };
+}
+
+function buildUrl(
+  view: string,
+  categoryId?: string | null,
+  subcategoryId?: string | null,
+  itemId?: string | null
+): string {
+  if (view === 'home') return '/';
+  if (view === 'calculator') return '/kalkulator';
+  if (view === 'screener') return '/screener';
+
+  if (!categoryId) return '/';
+  const category = CATEGORIES_DATA.find(c => c.id === categoryId);
+  if (!category) return '/';
+
+  if (view === 'category') return `/${category.slug}`;
+
+  if (!subcategoryId) return `/${category.slug}`;
+  const subcategory = category.subcategories.find(s => s.id === subcategoryId);
+  if (!subcategory) return `/${category.slug}`;
+
+  if (view === 'subcategory') return `/${category.slug}/${subcategory.slug}`;
+
+  if (!itemId) return `/${category.slug}/${subcategory.slug}`;
+  const item = subcategory.items.find(i => i.id === itemId);
+  if (!item) return `/${category.slug}/${subcategory.slug}`;
+
+  return `/${category.slug}/${subcategory.slug}/${item.slug}`;
+}
+
+function getInitialUrlState() {
+  if (typeof window === 'undefined')
+    return { view: 'home' as ActiveViewType, categoryId: null, subcategoryId: null, itemId: null };
+  return parseUrl(window.location.pathname);
+}
+
+// ============================================================
+// CONTEXT TYPE
+// ============================================================
+
 interface FinancialContextType {
   activeView: ActiveViewType;
   selectedCategoryId: string | null;
@@ -45,11 +138,18 @@ interface FinancialContextType {
 
 const FinancialContext = createContext<FinancialContextType | undefined>(undefined);
 
+// ============================================================
+// PROVIDER
+// ============================================================
+
 export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [activeView, setActiveView] = useState<ActiveViewType>('home');
-  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
-  const [selectedSubcategoryId, setSelectedSubcategoryId] = useState<string | null>(null);
-  const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
+  // Initialize state from URL on first render
+  const initial = getInitialUrlState();
+
+  const [activeView, setActiveView] = useState<ActiveViewType>(initial.view);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(initial.categoryId);
+  const [selectedSubcategoryId, setSelectedSubcategoryId] = useState<string | null>(initial.subcategoryId);
+  const [selectedItemId, setSelectedItemId] = useState<string | null>(initial.itemId);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [lang, setLang] = useState<LanguageCode>('id');
@@ -61,18 +161,53 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const [lastWorkerResult, setLastWorkerResult] = useState<WorkerDispatchResult | null>(null);
   const [isWorkerLoading, setIsWorkerLoading] = useState(false);
 
-  // Sync scroll to top on page transition
+  // ============================================================
+  // Listen to browser back/forward button
+  // ============================================================
+  useEffect(() => {
+    function handlePopState() {
+      const state = parseUrl(window.location.pathname);
+      setActiveView(state.view);
+      setSelectedCategoryId(state.categoryId);
+      setSelectedSubcategoryId(state.subcategoryId);
+      setSelectedItemId(state.itemId);
+    }
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // ============================================================
+  // Helper: push URL to browser history
+  // ============================================================
+  function pushUrl(
+    view: string,
+    categoryId?: string | null,
+    subcategoryId?: string | null,
+    itemId?: string | null
+  ) {
+    const url = buildUrl(view, categoryId, subcategoryId, itemId);
+    if (typeof window !== 'undefined' && window.location.pathname !== url) {
+      window.history.pushState({ view, categoryId, subcategoryId, itemId }, '', url);
+    }
+  }
+
   const scrollToTop = () => {
     if (typeof window !== 'undefined') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
+  // ============================================================
+  // Navigation functions — update state AND push URL
+  // ============================================================
+
   const navigateToHome = () => {
     setActiveView('home');
     setSelectedCategoryId(null);
     setSelectedSubcategoryId(null);
     setSelectedItemId(null);
+    pushUrl('home');
     setIsMobileMenuOpen(false);
     scrollToTop();
   };
@@ -82,6 +217,7 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     setSelectedCategoryId(categoryId);
     setSelectedSubcategoryId(null);
     setSelectedItemId(null);
+    pushUrl('category', categoryId);
     setIsMobileMenuOpen(false);
     scrollToTop();
   };
@@ -91,6 +227,7 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     setSelectedCategoryId(categoryId);
     setSelectedSubcategoryId(subcategoryId);
     setSelectedItemId(null);
+    pushUrl('subcategory', categoryId, subcategoryId);
     setIsMobileMenuOpen(false);
     scrollToTop();
   };
@@ -100,15 +237,24 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     setSelectedCategoryId(categoryId);
     setSelectedSubcategoryId(subcategoryId);
     setSelectedItemId(itemId);
+    pushUrl('item', categoryId, subcategoryId, itemId);
     setIsMobileMenuOpen(false);
     scrollToTop();
   };
 
   const navigateToTool = (tool: 'calculator' | 'screener') => {
     setActiveView(tool);
+    setSelectedCategoryId(null);
+    setSelectedSubcategoryId(null);
+    setSelectedItemId(null);
+    pushUrl(tool);
     setIsMobileMenuOpen(false);
     scrollToTop();
   };
+
+  // ============================================================
+  // API Key & Worker (unchanged)
+  // ============================================================
 
   const updateApiKey = (newKey: string) => {
     setApiKeyState(newKey);
