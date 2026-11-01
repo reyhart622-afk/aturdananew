@@ -98,16 +98,31 @@ export const SidebarDesktop: React.FC = () => {
           </div>
         </button>
 
-        {/* Live BEI Market Status */}
-        <div className="flex items-center justify-between px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-800/80 text-[11px]">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400" />
-            <span className="text-slate-300 font-medium">Bursa Efek Indonesia</span>
-          </div>
-          <span className="text-emerald-400 font-mono font-semibold">PASAR BUKA</span>
-        </div>
-      </div>
+        {/* Live BEI Market Status — dinamis berdasarkan jam trading WIB */}
+{(() => {
+  const now = new Date();
+  const wib = new Date(now.getTime() + 7 * 60 * 60 * 1000);
+  const day = wib.getUTCDay();
+  const time = wib.getUTCHours() * 60 + wib.getUTCMinutes();
+  const isWeekend = day === 0 || day === 6;
+  const isMarketOpen = !isWeekend && time >= 540 && time < 945;
+  const isPreClose = !isWeekend && time >= 945 && time < 960;
 
+  const status = isWeekend ? 'PASAR TUTUP' : isMarketOpen ? 'PASAR BUKA' : isPreClose ? 'PRA-PENUTUPAN' : 'PASAR TUTUP';
+  const dotColor = isMarketOpen ? 'bg-emerald-400 animate-pulse' : isPreClose ? 'bg-amber-400 animate-pulse' : 'bg-slate-600';
+  const textColor = isMarketOpen ? 'text-emerald-400' : isPreClose ? 'text-amber-400' : 'text-slate-500';
+
+  return (
+    <div className="flex items-center justify-between px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-800/80 text-[11px]">
+      <div className="flex items-center gap-2">
+        <span className={`w-2 h-2 rounded-full ${dotColor}`} />
+        <span className="text-slate-300 font-medium">Bursa Efek Indonesia</span>
+      </div>
+      <span className={`font-mono font-semibold ${textColor}`}>{status}</span>
+    </div>
+  );
+})()}
+        
       {/* Instant Search Bar */}
       <div className="px-5 py-3 border-b border-slate-800/60 bg-[#0b1016]/50">
         <div className="relative">
