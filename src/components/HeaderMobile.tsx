@@ -75,7 +75,7 @@ export const HeaderMobile: React.FC = () => {
         </button>
 
         {/* Right header controls */}
-        <div className="flex items-center gap-2">
+        <div className="flex flex-col items-end gap-1.5">
           {/* Quick Language Toggle */}
           <LanguageSelector compact={true} />
 
