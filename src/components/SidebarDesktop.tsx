@@ -98,7 +98,15 @@ export const SidebarDesktop: React.FC = () => {
           </div>
         </button>
 
-        
+        {/* Live BEI Market Status */}
+        <div className="flex items-center justify-between px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-800/80 text-[11px]">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-400" />
+            <span className="text-slate-300 font-medium">Bursa Efek Indonesia</span>
+          </div>
+          <span className="text-emerald-400 font-mono font-semibold">PASAR BUKA</span>
+        </div>
+      </div>
 
       {/* Instant Search Bar */}
       <div className="px-5 py-3 border-b border-slate-800/60 bg-[#0b1016]/50">
