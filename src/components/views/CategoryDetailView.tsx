@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useFinance } from '../../context/FinancialContext';
 import { CATEGORIES_DATA } from '../../data/categoriesData';
-import { ArrowRight, ChevronRight, Layers, Send, RefreshCw, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, ChevronRight, Layers, CheckCircle2 } from 'lucide-react';
 
 export const CategoryDetailView: React.FC = () => {
   const {
@@ -14,12 +14,32 @@ export const CategoryDetailView: React.FC = () => {
 
   const category = CATEGORIES_DATA.find((c) => c.id === selectedCategoryId) || CATEGORIES_DATA[0];
 
-  const handleSyncCategoryData = async () => {
-    await triggerWorkerAction('SYNC_CATEGORY_FEED', {
-      categoryId: category.id,
-      subcategoriesCount: category.subcategories.length
-    });
-  };
+  const [syncNotice, setSyncNotice] = useState<string | null>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function autoSync() {
+      setSyncNotice('Menghubungkan ke Cloudflare Worker...');
+      const res = await triggerWorkerAction('SYNC_CATEGORY_FEED', {
+        categoryId: category.id,
+        subcategoriesCount: category.subcategories.length
+      });
+
+      if (!isMounted) return;
+
+      if (res.success) {
+        setSyncNotice(`Feed ${category.name} tersinkron (${res.latencyMs}ms)`);
+        setTimeout(() => isMounted && setSyncNotice(null), 3500);
+      } else {
+        setSyncNotice(`Gagal: ${res.message}`);
+        setTimeout(() => isMounted && setSyncNotice(null), 5000);
+      }
+    }
+
+    autoSync();
+    return () => { isMounted = false; };
+  }, [category.id]);
 
   return (
     <div className="space-y-8 animate-fade-in">
@@ -52,17 +72,12 @@ export const CategoryDetailView: React.FC = () => {
           ))}
         </div>
 
-        {/* Worker Action Button (Disembunyikan dari tampilan mata pengunjung) */}
-        <div className="pt-3" style={{ display: 'none' }}>
-          <button
-            onClick={handleSyncCategoryData}
-            disabled={isWorkerLoading}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-950/60 transition-colors text-xs font-medium cursor-pointer"
-          >
-            {isWorkerLoading ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Send className="w-3.5 h-3.5" />}
-            <span>Kirim API Key ke Cloudflare Worker untuk Feed {category.name}</span>
-          </button>
-        </div>
+        {syncNotice && (
+          <div className="p-2.5 rounded-lg bg-emerald-950/80 border border-emerald-500/40 text-xs text-emerald-300 flex items-center gap-2 animate-fade-in font-medium">
+            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            {syncNotice}
+          </div>
+        )}
       </section>
 
       {/* Grid of Subcategories */}
