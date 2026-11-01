@@ -1,0 +1,6 @@
+{
+  "name": "Aturdana.id - Portal Saham, IHSG, Deposito & Investasi Finansial",
+  "description": "Portal finansial terlengkap di Indonesia untuk analisis Saham, IHSG, Deposito, Reksa Dana, dan Obligasi dengan data real-time, screener, kalkulator, dan API terintegrasi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

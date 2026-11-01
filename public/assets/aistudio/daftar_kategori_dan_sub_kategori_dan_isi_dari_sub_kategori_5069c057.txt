@@ -1,0 +1,721 @@
+Saham & IHSG
+
+1. Harga dan grafik saham
+- Harga saham terbaru
+- Harga pembukaan
+- Harga tertinggi
+- Harga terendah
+- Harga penutupan
+- Perubahan harga
+- Persentase perubahan harga
+- Harga saham historis
+- Grafik harga harian
+- Grafik harga mingguan
+- Grafik harga bulanan
+- Grafik intraday
+- Data OHLC
+- Volume perdagangan
+- Nilai transaksi
+- Frekuensi transaksi
+
+2. Indeks saham
+- IHSG
+- LQ45
+- IDX30
+- IDX80
+- IDX Value30
+- IDX Growth30
+- IDX High Dividend 20
+- IDX Quality30
+- IDX ESG Leaders
+- IDX Sectoral
+- Indeks saham syariah
+- Indeks saham sektoral
+- Grafik indeks
+- Riwayat nilai indeks
+- Daftar konstituen indeks
+
+3. Daftar dan ranking saham
+- Daftar seluruh saham BEI
+- Daftar saham berdasarkan sektor
+- Daftar saham berdasarkan industri
+- Daftar saham berdasarkan papan pencatatan
+- Saham paling aktif
+- Top gainers
+- Top losers
+- Saham dengan volume terbesar
+- Saham dengan nilai transaksi terbesar
+- Saham dengan frekuensi transaksi tertinggi
+- Saham paling banyak dibeli asing
+- Saham paling banyak dijual asing
+- Daftar saham IPO
+- Daftar saham syariah
+
+4. Data transaksi dan aliran dana
+- Ringkasan transaksi saham
+- Data bid
+- Data offer
+- Bid-ask spread
+- Foreign buy
+- Foreign sell
+- Foreign net buy/sell
+- Broker summary
+- Broker buy
+- Broker sell
+- Volume transaksi broker
+- Nilai transaksi broker
+- Frekuensi transaksi broker
+- Harga rata-rata beli broker
+- Harga rata-rata jual broker
+
+5. Fundamental dan valuasi
+- EPS
+- PER
+- PBV
+- ROE
+- ROA
+- DER
+- NPM
+- GPM
+- Operating margin
+- Dividend yield
+- Market capitalization
+- Revenue
+- Net income
+- Total assets
+- Total liabilities
+- Total equity
+- Cash flow
+- Laporan laba rugi
+- Neraca keuangan
+- Laporan arus kas
+- Riwayat laporan keuangan
+
+6. Dividen dan aksi korporasi
+- Riwayat dividen
+- Dividen per saham
+- Dividend yield
+- Cum date
+- Ex date
+- Recording date
+- Payment date
+- Jadwal IPO
+- Jadwal rights issue
+- Jadwal stock split
+- Jadwal reverse stock
+- Jadwal warrant
+- Jadwal RUPS
+- Jadwal public expose
+- Riwayat aksi korporasi
+
+7. Profil dan data emiten
+- Nama perusahaan
+- Kode saham
+- Sektor perusahaan
+- Sub-sektor perusahaan
+- Industri perusahaan
+- Tanggal IPO
+- Jumlah saham beredar
+- Jumlah saham tercatat
+- Market capitalization
+- Pemegang saham utama
+- Komposisi kepemilikan saham
+- Direksi dan komisaris
+- Anak perusahaan
+
+8. Indikator teknikal
+- Moving Average
+- EMA
+- RSI
+- MACD
+- Bollinger Bands
+- Stochastic
+- ATR
+- Support dan resistance berbasis perhitungan data
+
+9. Kalender dan status bursa
+- Kalender perdagangan bursa
+- Hari libur bursa
+- Jadwal perdagangan
+- Status pasar buka/tutup
+- Status suspensi saham
+- Status unusual market activity (UMA)
+- Status perdagangan saham
+
+10. Screener dan visualisasi
+- Stock screener
+- Screener berdasarkan harga
+- Screener berdasarkan volume
+- Screener berdasarkan PER
+- Screener berdasarkan PBV
+- Screener berdasarkan dividen
+- Screener berdasarkan sektor
+- Heatmap saham
+- Heatmap sektoral
+- Perbandingan performa saham
+
+11. Data portofolio
+- Nilai portofolio
+- Komposisi portofolio
+- Keuntungan dan kerugian
+- Persentase keuntungan dan kerugian
+- Harga rata-rata kepemilikan
+- Alokasi saham berdasarkan sektor
+
+
+
+Reksa Dana & ETF
+
+1. Daftar dan identitas reksa dana
+- Daftar seluruh reksa dana
+- Nama reksa dana
+- Kode reksa dana
+- Jenis reksa dana
+- Nama manajer investasi
+- Bank kustodian
+- Tanggal peluncuran reksa dana
+- Status aktif atau nonaktif
+- Daftar reksa dana syariah
+- Daftar reksa dana konvensional
+- Daftar reksa dana berdasarkan manajer investasi
+- Daftar reksa dana berdasarkan kategori
+
+2. Harga dan NAB Reksa Dana
+- NAB per unit terbaru
+- NAB harian
+- NAB historis
+- Perubahan NAB harian
+- Persentase perubahan NAB
+- Grafik NAB
+- Grafik pertumbuhan NAB
+- NAB tertinggi
+- NAB terendah
+- Riwayat NAB berdasarkan periode
+
+3. Kinerja dan Imbal Hasil
+- Return harian
+- Return mingguan
+- Return bulanan
+- Return 1 bulan
+- Return 3 bulan
+- Return 6 bulan
+- Return YTD
+- Return 1 tahun
+- Return 3 tahun
+- Return 5 tahun
+- Return sejak peluncuran
+- Annualized return
+- Cumulative return
+- Ranking return reksa dana
+- Top performing reksa dana
+- Bottom performing reksa dana
+
+4. Dana Kelolaan dan Unit Penyertaan
+- Asset Under Management (AUM)
+- AUM historis
+- Perubahan AUM
+- Pertumbuhan AUM
+- Total unit penyertaan
+- Perubahan unit penyertaan
+- Dana masuk dan keluar
+- Ranking AUM reksa dana
+- Reksa dana dengan AUM terbesar
+
+5. Risiko dan Indikator Kinerja
+- Risk profile
+- Volatilitas
+- Maximum drawdown
+- Sharpe ratio
+- Sortino ratio
+- Standard deviation
+- Beta
+- Alpha
+- Tracking error
+- Information ratio
+- Risk-adjusted return
+
+6. Komposisi dan Alokasi Aset
+- Alokasi saham
+- Alokasi obligasi
+- Alokasi pasar uang
+- Alokasi deposito
+- Alokasi kas
+- Alokasi aset lainnya
+- Komposisi portofolio
+- Top 10 holdings
+- Daftar saham dalam portofolio
+- Daftar obligasi dalam portofolio
+- Perubahan komposisi portofolio
+- Grafik alokasi aset
+
+7. Biaya dan Ketentuan Investasi
+- Minimum pembelian
+- Minimum penjualan
+- Minimum switching
+- Subscription fee
+- Redemption fee
+- Switching fee
+- Management fee
+- Custodian fee
+- Expense ratio
+- Total biaya operasional
+- Mata uang reksa dana
+
+8. Dividen dan Distribusi Hasil
+- Riwayat pembagian dividen
+- Nilai dividen per unit
+- Tanggal pembagian dividen
+- Dividend yield
+- Riwayat distribusi hasil investasi
+
+9. Benchmark dan Perbandingan
+- Benchmark reksa dana
+- Indeks acuan reksa dana
+- Perbandingan return dengan IHSG
+- Perbandingan return dengan LQ45
+- Perbandingan return dengan indeks obligasi
+- Perbandingan return antar reksa dana
+- Grafik perbandingan kinerja
+- Ranking reksa dana berdasarkan kategori
+
+10. ETF
+- Daftar ETF
+- Kode ETF
+- Nama ETF
+- Manajer investasi ETF
+- Harga ETF terbaru
+- Harga pembukaan ETF
+- Harga tertinggi ETF
+- Harga terendah ETF
+- Harga penutupan ETF
+- Perubahan harga ETF
+- Persentase perubahan harga ETF
+- Volume perdagangan ETF
+- Nilai transaksi ETF
+- Frekuensi transaksi ETF
+- Grafik harga ETF
+- Harga historis ETF
+- NAB per unit ETF
+- Indicative Net Asset Value (iNAV)
+- Premium atau diskon harga ETF terhadap NAB
+- AUM ETF
+- Komposisi portofolio ETF
+- Underlying ETF
+- Tracking error ETF
+- Return ETF
+- Ranking ETF berdasarkan return
+- Ranking ETF berdasarkan volume transaksi
+
+11. Screener dan Visualisasi
+- Reksa dana dengan return tertinggi
+- Reksa dana dengan return terendah
+- Reksa dana dengan AUM terbesar
+- Reksa dana dengan volatilitas terendah
+- Reksa dana berdasarkan expense ratio
+- Reksa dana berdasarkan minimum pembelian
+- Screener reksa dana berdasarkan kategori
+- Screener reksa dana berdasarkan manajer investasi
+- Screener reksa dana syariah
+- Heatmap kinerja reksa dana
+- Grafik pertumbuhan investasi
+- Simulasi pertumbuhan nilai investasi berdasarkan data historis
+
+12. Indeks Reksa Dana
+- Indeks reksa dana saham
+- Indeks reksa dana pendapatan tetap
+- Indeks reksa dana pasar uang
+- Indeks reksa dana campuran
+- Indeks reksa dana syariah
+- Nilai indeks reksa dana
+- Grafik indeks reksa dana
+- Return indeks reksa dana
+
+
+
+Deposito & Produk Tabungan
+
+1. Daftar produk deposito
+- Daftar deposito seluruh bank
+- Nama produk deposito
+- Nama bank penerbit
+- Jenis deposito
+- Deposito konvensional
+- Deposito syariah
+- Deposito online
+- Deposito bank digital
+- Deposito valas
+- Status produk deposito
+
+2. Suku Bunga Deposito
+- Suku bunga deposito terbaru
+- Suku bunga deposito 1 bulan
+- Suku bunga deposito 3 bulan
+- Suku bunga deposito 6 bulan
+- Suku bunga deposito 12 bulan
+- Suku bunga deposito 24 bulan
+- Suku bunga deposito 36 bulan
+- Suku bunga berdasarkan nominal penempatan
+- Suku bunga deposito tertinggi
+- Suku bunga deposito terendah
+- Riwayat perubahan suku bunga deposito
+- Ranking bunga deposito antarbank
+- Perbandingan bunga deposito bank digital
+- Perbandingan bunga deposito bank konvensional
+- Perbandingan bunga deposito syariah
+
+3. Ketentuan dan Biaya Deposito
+- Minimum penempatan deposito
+- Maksimum penempatan deposito
+- Pilihan tenor deposito
+- Frekuensi pembayaran bunga
+- Sistem pembayaran bunga
+- Bunga dibayar di muka
+- Bunga dibayar bulanan
+- Bunga dibayar saat jatuh tempo
+- Biaya pencairan deposito
+- Penalti pencairan sebelum jatuh tempo
+- Pajak bunga deposito
+- Fasilitas automatic rollover (ARO)
+- Fasilitas ARO plus
+- Ketentuan perpanjangan deposito
+
+4. Simulasi dan Kalkulator Deposito
+- Kalkulator bunga deposito
+- Simulasi keuntungan deposito
+- Simulasi bunga deposito setelah pajak
+- Simulasi deposito berdasarkan nominal
+- Simulasi deposito berdasarkan tenor
+- Simulasi deposito berdasarkan bank
+- Simulasi pencairan deposito
+- Perhitungan nilai jatuh tempo
+- Perbandingan hasil deposito antarbank
+
+5. Daftar Produk Tabungan
+- Daftar produk tabungan seluruh bank
+- Nama produk tabungan
+- Nama bank penerbit
+- Tabungan reguler
+- Tabungan digital
+- Tabungan syariah
+- Tabungan berjangka
+- Tabungan rencana
+- Tabungan bisnis
+- Tabungan payroll
+- Tabungan anak
+- Tabungan pelajar
+- TabunganKu
+- Tabungan valas
+- Tabungan multicurrency
+- Tabungan haji
+- Tabungan umrah
+- Status produk tabungan
+
+6. Suku Bunga Tabungan
+- Suku bunga tabungan terbaru
+- Suku bunga tabungan berdasarkan saldo
+- Suku bunga tabungan reguler
+- Suku bunga tabungan digital
+- Suku bunga tabungan berjangka
+- Suku bunga tabungan syariah
+- Suku bunga tabungan valas
+- Suku bunga tabungan tertinggi
+- Suku bunga tabungan terendah
+- Riwayat perubahan suku bunga tabungan
+- Ranking bunga tabungan antarbank
+- Perbandingan bunga tabungan bank digital
+- Perbandingan bunga tabungan bank konvensional
+
+7. Ketentuan dan Biaya Tabungan
+- Minimum saldo pembukaan
+- Minimum saldo mengendap
+- Saldo minimum bulanan
+- Biaya administrasi bulanan
+- Biaya kartu ATM
+- Biaya transfer
+- Biaya tarik tunai
+- Biaya penutupan rekening
+- Biaya saldo di bawah minimum
+- Batas transaksi harian
+- Limit transfer harian
+- Limit tarik tunai harian
+- Jumlah transaksi gratis
+- Syarat saldo untuk mendapatkan bunga
+
+8. Produk Tabungan Digital
+- Daftar bank digital
+- Daftar produk tabungan bank digital
+- Suku bunga tabungan bank digital
+- Suku bunga deposito bank digital
+- Minimum saldo bank digital
+- Biaya administrasi bank digital
+- Limit transaksi bank digital
+- Fitur kantong atau subrekening
+- Fitur tabungan otomatis
+- Fitur bunga harian
+- Fitur bunga bertingkat
+
+9. Produk Tabungan Syariah
+- Daftar tabungan syariah
+- Daftar deposito syariah
+- Nama bank syariah
+- Jenis akad tabungan
+- Jenis akad deposito
+- Nisbah bagi hasil tabungan
+- Nisbah bagi hasil deposito
+- Indikasi tingkat bagi hasil
+- Riwayat bagi hasil
+- Minimum penempatan deposito syariah
+- Tenor deposito syariah
+
+10. Perbandingan dan Ranking
+- Ranking deposito berdasarkan bunga tertinggi
+- Ranking tabungan berdasarkan bunga tertinggi
+- Ranking deposito berdasarkan tenor
+- Ranking tabungan berdasarkan biaya administrasi
+- Ranking tabungan berdasarkan minimum saldo
+- Perbandingan deposito antarbank
+- Perbandingan tabungan antarbank
+- Perbandingan deposito bank digital
+- Perbandingan tabungan bank digital
+- Perbandingan deposito syariah
+- Perbandingan tabungan syariah
+- Perbandingan keuntungan deposito setelah pajak
+- Perbandingan biaya tabungan
+
+11. Data Suku Bunga Acuan dan Penjaminan
+- Suku bunga BI
+- BI-Rate historis
+- Tingkat bunga penjaminan LPS
+- Riwayat perubahan tingkat bunga penjaminan LPS
+- Perbandingan bunga deposito dengan bunga penjaminan LPS
+- Perbandingan bunga tabungan dengan bunga penjaminan LPS
+
+12. Screener dan Visualisasi
+- Screener deposito berdasarkan bunga
+- Screener deposito berdasarkan tenor
+- Screener deposito berdasarkan minimum penempatan
+- Screener deposito berdasarkan bank
+- Screener tabungan berdasarkan bunga
+- Screener tabungan berdasarkan biaya
+- Screener tabungan berdasarkan minimum saldo
+- Screener produk berdasarkan jenis bank
+- Grafik perbandingan bunga deposito
+- Grafik perbandingan bunga tabungan
+- Grafik historis suku bunga deposito
+- Grafik historis suku bunga tabungan
+- Grafik perubahan BI-Rate
+- Grafik perubahan tingkat bunga penjaminan LPS
+
+
+Obligasi & Pendapatan Tetap
+
+1. Daftar dan identitas obligasi
+- Daftar obligasi pemerintah
+- Daftar obligasi korporasi
+- Daftar sukuk pemerintah
+- Daftar sukuk korporasi
+- Daftar obligasi ritel
+- Daftar obligasi negara
+- Daftar Surat Berharga Negara (SBN)
+- Daftar Surat Utang Negara (SUN)
+- Daftar Obligasi Negara Ritel (ORI)
+- Daftar Sukuk Ritel (SR)
+- Daftar Savings Bond Ritel (SBR)
+- Daftar Sukuk Tabungan (ST)
+- Daftar obligasi berdasarkan penerbit
+- Daftar obligasi berdasarkan sektor
+- Daftar obligasi berdasarkan mata uang
+- Daftar obligasi berdasarkan peringkat kredit
+- Kode dan identitas obligasi
+- Status perdagangan obligasi
+
+2. Harga dan nilai obligasi
+- Harga obligasi terbaru
+- Harga obligasi historis
+- Harga bid obligasi
+- Harga offer obligasi
+- Harga pasar obligasi
+- Harga clean price
+- Harga dirty price
+- Accrued interest
+- Nilai nominal obligasi
+- Nilai outstanding obligasi
+- Perubahan harga obligasi
+- Persentase perubahan harga obligasi
+- Grafik harga obligasi
+- Grafik pergerakan harga obligasi
+- Harga obligasi berdasarkan tenor
+- Harga obligasi berdasarkan penerbit
+
+3. Kupon dan imbal hasil
+- Kupon obligasi
+- Kupon tetap
+- Kupon mengambang
+- Kupon floating with floor
+- Jadwal pembayaran kupon
+- Tanggal pembayaran kupon
+- Kupon berikutnya
+- Yield to Maturity (YTM)
+- Yield to Call (YTC)
+- Current yield
+- Yield historis
+- Yield obligasi pemerintah
+- Yield obligasi korporasi
+- Yield sukuk
+- Ranking obligasi berdasarkan yield
+- Grafik perkembangan yield obligasi
+
+4. Tenor dan jatuh tempo
+- Tanggal penerbitan
+- Tanggal jatuh tempo
+- Sisa tenor obligasi
+- Obligasi jatuh tempo terdekat
+- Obligasi jatuh tempo berdasarkan tahun
+- Obligasi jatuh tempo berdasarkan bulan
+- Ranking obligasi berdasarkan sisa tenor
+- Jadwal jatuh tempo obligasi pemerintah
+- Jadwal jatuh tempo obligasi korporasi
+
+5. Data perdagangan obligasi
+- Volume perdagangan obligasi
+- Nilai transaksi obligasi
+- Frekuensi transaksi obligasi
+- Data bid dan offer
+- Spread bid-ask
+- Obligasi paling aktif diperdagangkan
+- Ranking obligasi berdasarkan volume
+- Ranking obligasi berdasarkan nilai transaksi
+- Riwayat transaksi obligasi
+- Grafik volume perdagangan
+- Grafik nilai transaksi
+
+6. Data penerbit dan peringkat kredit
+- Nama penerbit obligasi
+- Profil penerbit obligasi
+- Sektor penerbit
+- Industri penerbit
+- Peringkat kredit obligasi
+- Peringkat kredit penerbit
+- Riwayat perubahan peringkat kredit
+- Lembaga pemeringkat
+- Status peringkat kredit
+- Jumlah obligasi yang diterbitkan penerbit
+- Total outstanding obligasi penerbit
+
+7. Risiko dan indikator obligasi
+- Duration
+- Modified duration
+- Macaulay duration
+- Convexity
+- Credit spread
+- Interest rate sensitivity
+- Risiko gagal bayar
+- Probability of default
+- Recovery rate
+- Rating outlook
+- Rating watch
+- Grafik hubungan harga dan yield
+- Grafik hubungan yield dan tenor
+
+8. Data obligasi pemerintah dan SBN
+- Yield SUN
+- Yield SBN
+- Yield benchmark pemerintah
+- Yield curve pemerintah
+- Kurva imbal hasil SBN
+- Harga SUN
+- Harga SBN
+- Outstanding SBN
+- Total utang obligasi pemerintah
+- Jadwal lelang SUN
+- Hasil lelang SUN
+- Jadwal lelang SBSN
+- Hasil lelang SBSN
+- Target dan realisasi lelang
+- Bid-to-cover ratio lelang
+- Weighted average yield lelang
+
+9. Data obligasi korporasi
+- Yield obligasi korporasi
+- Harga obligasi korporasi
+- Kupon obligasi korporasi
+- Peringkat obligasi korporasi
+- Outstanding obligasi korporasi
+- Jadwal penerbitan obligasi korporasi
+- Jadwal jatuh tempo obligasi korporasi
+- Daftar obligasi korporasi berdasarkan rating
+- Daftar obligasi korporasi berdasarkan sektor
+- Ranking obligasi korporasi berdasarkan yield
+
+10. Reksa dana pendapatan tetap
+- Daftar reksa dana pendapatan tetap
+- NAB reksa dana pendapatan tetap
+- NAB historis
+- Return harian
+- Return bulanan
+- Return 1 tahun
+- Return 3 tahun
+- Return 5 tahun
+- AUM reksa dana pendapatan tetap
+- Komposisi portofolio obligasi
+- Top holdings obligasi
+- Duration portofolio
+- Yield portofolio
+- Ranking reksa dana pendapatan tetap
+- Perbandingan kinerja reksa dana pendapatan tetap
+
+11. ETF obligasi
+- Daftar ETF obligasi
+- Harga ETF obligasi
+- Harga historis ETF obligasi
+- Volume perdagangan ETF obligasi
+- Nilai transaksi ETF obligasi
+- NAB per unit ETF obligasi
+- Indicative Net Asset Value (iNAV)
+- Premium atau diskon terhadap NAB
+- Komposisi portofolio ETF obligasi
+- Yield ETF obligasi
+- Return ETF obligasi
+- Ranking ETF obligasi berdasarkan return
+
+12. Data suku bunga dan indikator pasar
+- BI-Rate
+- Suku bunga pasar uang
+- Yield deposito pembanding
+- Yield obligasi pemerintah Amerika Serikat
+- Yield US Treasury
+- Yield spread Indonesia-US
+- Inflasi
+- Nilai tukar rupiah
+- Kurva suku bunga
+- Riwayat perubahan suku bunga acuan
+
+13. Perbandingan dan ranking
+- Ranking obligasi berdasarkan yield
+- Ranking obligasi berdasarkan harga
+- Ranking obligasi berdasarkan kupon
+- Ranking obligasi berdasarkan rating
+- Ranking obligasi berdasarkan tenor
+- Perbandingan yield antarobligasi
+- Perbandingan kupon antarobligasi
+- Perbandingan obligasi pemerintah dan korporasi
+- Perbandingan obligasi berdasarkan rating
+- Perbandingan obligasi berdasarkan jatuh tempo
+- Perbandingan yield obligasi dan deposito
+- Perbandingan return obligasi dan reksa dana pendapatan tetap
+
+14. Screener dan visualisasi
+- Screener obligasi berdasarkan yield
+- Screener obligasi berdasarkan kupon
+- Screener obligasi berdasarkan tenor
+- Screener obligasi berdasarkan rating
+- Screener obligasi berdasarkan penerbit
+- Screener obligasi berdasarkan harga
+- Screener obligasi berdasarkan jatuh tempo
+- Grafik harga obligasi
+- Grafik yield obligasi
+- Grafik yield curve
+- Grafik perbandingan yield obligasi
+- Grafik distribusi jatuh tempo
+- Grafik komposisi obligasi berdasarkan rating
+- Heatmap kinerja obligasi
