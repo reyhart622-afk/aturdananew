@@ -12,10 +12,27 @@ import {
   DEFAULT_API_KEY
 } from '../services/cloudflareWorkerApi';
 
-export type ActiveViewType = 'home' | 'category' | 'subcategory' | 'item' | 'calculator' | 'screener';
+export type ActiveViewType = 'home' | 'category' | 'subcategory' | 'item' | 'calculator' | 'screener' | 'legal';
 
 // ============================================================
-// URL ROUTING — parse & build URL untuk semua halaman
+// LEGAL PAGE URL MAPPING
+// ============================================================
+const LEGAL_SLUGS: Record<string, string> = {
+  disclaimer: '/disclaimer',
+  privacy: '/kebijakan-privasi',
+  terms: '/syarat-dan-ketentuan',
+  contact: '/kontak',
+  about: '/tentang',
+  pedoman: '/pedoman-media-siber',
+};
+
+const LEGAL_SLUG_TO_KEY: Record<string, string> = {};
+for (const [key, slug] of Object.entries(LEGAL_SLUGS)) {
+  LEGAL_SLUG_TO_KEY[slug] = key;
+}
+
+// ============================================================
+// URL ROUTING
 // ============================================================
 
 function findCategoryBySlug(slug: string) {
@@ -35,48 +52,57 @@ function parseUrl(pathname: string): {
   categoryId: string | null;
   subcategoryId: string | null;
   itemId: string | null;
+  legalPage: string | null;
 } {
   const parts = pathname.split('/').filter(Boolean);
 
   if (parts.length === 0)
-    return { view: 'home', categoryId: null, subcategoryId: null, itemId: null };
+    return { view: 'home', categoryId: null, subcategoryId: null, itemId: null, legalPage: null };
+
+  // Check legal pages
+  const legalPath = '/' + parts[0];
+  if (parts.length === 1 && LEGAL_SLUG_TO_KEY[legalPath]) {
+    return { view: 'legal', categoryId: null, subcategoryId: null, itemId: null, legalPage: LEGAL_SLUG_TO_KEY[legalPath] };
+  }
 
   if (parts[0] === 'kalkulator')
-    return { view: 'calculator', categoryId: null, subcategoryId: null, itemId: null };
+    return { view: 'calculator', categoryId: null, subcategoryId: null, itemId: null, legalPage: null };
 
   if (parts[0] === 'screener')
-    return { view: 'screener', categoryId: null, subcategoryId: null, itemId: null };
+    return { view: 'screener', categoryId: null, subcategoryId: null, itemId: null, legalPage: null };
 
   const category = findCategoryBySlug(parts[0]);
   if (!category)
-    return { view: 'home', categoryId: null, subcategoryId: null, itemId: null };
+    return { view: 'home', categoryId: null, subcategoryId: null, itemId: null, legalPage: null };
 
   if (parts.length === 1)
-    return { view: 'category', categoryId: category.id, subcategoryId: null, itemId: null };
+    return { view: 'category', categoryId: category.id, subcategoryId: null, itemId: null, legalPage: null };
 
   const subcategory = findSubcategoryBySlug(category, parts[1]);
   if (!subcategory)
-    return { view: 'category', categoryId: category.id, subcategoryId: null, itemId: null };
+    return { view: 'category', categoryId: category.id, subcategoryId: null, itemId: null, legalPage: null };
 
   if (parts.length === 2)
-    return { view: 'subcategory', categoryId: category.id, subcategoryId: subcategory.id, itemId: null };
+    return { view: 'subcategory', categoryId: category.id, subcategoryId: subcategory.id, itemId: null, legalPage: null };
 
   const item = findItemBySlug(subcategory, parts[2]);
   if (!item)
-    return { view: 'subcategory', categoryId: category.id, subcategoryId: subcategory.id, itemId: null };
+    return { view: 'subcategory', categoryId: category.id, subcategoryId: subcategory.id, itemId: null, legalPage: null };
 
-  return { view: 'item', categoryId: category.id, subcategoryId: subcategory.id, itemId: item.id };
+  return { view: 'item', categoryId: category.id, subcategoryId: subcategory.id, itemId: item.id, legalPage: null };
 }
 
 function buildUrl(
   view: string,
   categoryId?: string | null,
   subcategoryId?: string | null,
-  itemId?: string | null
+  itemId?: string | null,
+  legalPage?: string | null
 ): string {
   if (view === 'home') return '/';
   if (view === 'calculator') return '/kalkulator';
   if (view === 'screener') return '/screener';
+  if (view === 'legal' && legalPage && LEGAL_SLUGS[legalPage]) return LEGAL_SLUGS[legalPage];
 
   if (!categoryId) return '/';
   const category = CATEGORIES_DATA.find(c => c.id === categoryId);
@@ -99,7 +125,7 @@ function buildUrl(
 
 function getInitialUrlState() {
   if (typeof window === 'undefined')
-    return { view: 'home' as ActiveViewType, categoryId: null, subcategoryId: null, itemId: null };
+    return { view: 'home' as ActiveViewType, categoryId: null, subcategoryId: null, itemId: null, legalPage: null };
   return parseUrl(window.location.pathname);
 }
 
@@ -112,6 +138,7 @@ interface FinancialContextType {
   selectedCategoryId: string | null;
   selectedSubcategoryId: string | null;
   selectedItemId: string | null;
+  legalPage: string | null;
   searchQuery: string;
   setSearchQuery: (q: string) => void;
   lang: LanguageCode;
@@ -133,6 +160,7 @@ interface FinancialContextType {
   navigateToSubcategory: (categoryId: string, subcategoryId: string) => void;
   navigateToItem: (categoryId: string, subcategoryId: string, itemId: string) => void;
   navigateToTool: (tool: 'calculator' | 'screener') => void;
+  navigateToLegal: (page: string) => void;
   resetApiKeyToDefault: () => void;
 }
 
@@ -143,13 +171,13 @@ const FinancialContext = createContext<FinancialContextType | undefined>(undefin
 // ============================================================
 
 export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Initialize state from URL on first render
   const initial = getInitialUrlState();
 
   const [activeView, setActiveView] = useState<ActiveViewType>(initial.view);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(initial.categoryId);
   const [selectedSubcategoryId, setSelectedSubcategoryId] = useState<string | null>(initial.subcategoryId);
   const [selectedItemId, setSelectedItemId] = useState<string | null>(initial.itemId);
+  const [legalPage, setLegalPage] = useState<string | null>(initial.legalPage);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [lang, setLang] = useState<LanguageCode>('id');
@@ -162,7 +190,7 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const [isWorkerLoading, setIsWorkerLoading] = useState(false);
 
   // ============================================================
-  // Listen to browser back/forward button
+  // Back/forward button
   // ============================================================
   useEffect(() => {
     function handlePopState() {
@@ -171,24 +199,23 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       setSelectedCategoryId(state.categoryId);
       setSelectedSubcategoryId(state.subcategoryId);
       setSelectedItemId(state.itemId);
+      setLegalPage(state.legalPage);
     }
 
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  // ============================================================
-  // Helper: push URL to browser history
-  // ============================================================
   function pushUrl(
     view: string,
     categoryId?: string | null,
     subcategoryId?: string | null,
-    itemId?: string | null
+    itemId?: string | null,
+    legalPage?: string | null
   ) {
-    const url = buildUrl(view, categoryId, subcategoryId, itemId);
+    const url = buildUrl(view, categoryId, subcategoryId, itemId, legalPage);
     if (typeof window !== 'undefined' && window.location.pathname !== url) {
-      window.history.pushState({ view, categoryId, subcategoryId, itemId }, '', url);
+      window.history.pushState({ view, categoryId, subcategoryId, itemId, legalPage }, '', url);
     }
   }
 
@@ -199,7 +226,7 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   };
 
   // ============================================================
-  // Navigation functions — update state AND push URL
+  // Navigation
   // ============================================================
 
   const navigateToHome = () => {
@@ -207,6 +234,7 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     setSelectedCategoryId(null);
     setSelectedSubcategoryId(null);
     setSelectedItemId(null);
+    setLegalPage(null);
     pushUrl('home');
     setIsMobileMenuOpen(false);
     scrollToTop();
@@ -217,6 +245,7 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     setSelectedCategoryId(categoryId);
     setSelectedSubcategoryId(null);
     setSelectedItemId(null);
+    setLegalPage(null);
     pushUrl('category', categoryId);
     setIsMobileMenuOpen(false);
     scrollToTop();
@@ -227,6 +256,7 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     setSelectedCategoryId(categoryId);
     setSelectedSubcategoryId(subcategoryId);
     setSelectedItemId(null);
+    setLegalPage(null);
     pushUrl('subcategory', categoryId, subcategoryId);
     setIsMobileMenuOpen(false);
     scrollToTop();
@@ -237,6 +267,7 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     setSelectedCategoryId(categoryId);
     setSelectedSubcategoryId(subcategoryId);
     setSelectedItemId(itemId);
+    setLegalPage(null);
     pushUrl('item', categoryId, subcategoryId, itemId);
     setIsMobileMenuOpen(false);
     scrollToTop();
@@ -247,13 +278,25 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     setSelectedCategoryId(null);
     setSelectedSubcategoryId(null);
     setSelectedItemId(null);
+    setLegalPage(null);
     pushUrl(tool);
     setIsMobileMenuOpen(false);
     scrollToTop();
   };
 
+  const navigateToLegal = (page: string) => {
+    setActiveView('legal');
+    setSelectedCategoryId(null);
+    setSelectedSubcategoryId(null);
+    setSelectedItemId(null);
+    setLegalPage(page);
+    pushUrl('legal', null, null, null, page);
+    setIsMobileMenuOpen(false);
+    scrollToTop();
+  };
+
   // ============================================================
-  // API Key & Worker (unchanged)
+  // API Key & Worker
   // ============================================================
 
   const updateApiKey = (newKey: string) => {
@@ -281,7 +324,6 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     }
   };
 
-  // Translation helper
   const t = (key: string): string => {
     return TRANSLATIONS[lang]?.[key] || TRANSLATIONS['id']?.[key] || key;
   };
@@ -293,6 +335,7 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         selectedCategoryId,
         selectedSubcategoryId,
         selectedItemId,
+        legalPage,
         searchQuery,
         setSearchQuery,
         lang,
@@ -314,6 +357,7 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         navigateToSubcategory,
         navigateToItem,
         navigateToTool,
+        navigateToLegal,
         resetApiKeyToDefault
       }}
     >
