@@ -178,7 +178,7 @@ export const SidebarDesktop: React.FC = () => {
         {/* Section Header */}
         <div className="flex items-center justify-between pt-2 px-1 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
           <span>{t('menu')}</span>
-          <span className="text-[10px] text-emerald-400/90 font-mono">3 INDUK · 35 SUB</span>
+          <span className="text-[10px] text-emerald-400/90 font-mono">4 INDUK · 48 SUB</span>
         </div>
 
         {/* 3 Main Categories Hierarchy */}
